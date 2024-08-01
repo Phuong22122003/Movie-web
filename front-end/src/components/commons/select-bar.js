@@ -1,39 +1,41 @@
+import "./select-bar.css"
+import "./default.css"
 export default function SelectBar(props) {
     console.log(props)
-    const listTypeOfMovie = props['typeOfMovie'].map(type =>
-        <li>
+    const listTypeOfMovie = props['typeOfMovie'].map((type,key) =>
+        <li key={key}>
             <a href={type.link}>{type.name}</a>
         </li>
     )
-    const listCountry = props['countries'].map(contry =>
-        <li>
+    const listCountry = props['countries'].map((contry,key) =>
+        <li key={key}>
             <a href={contry.link}>{contry.name}</a>
         </li>
     )
     return (
 
-        <ul className="list-item" style={{display:'flex',justifyContent : 'space-between' ,alignItems:'center'}}>
-            <li><a href="/home">Trang chủ</a></li>
-            <li>
+        <ul className="listItem">
+            <li key = {1}><a href="/home">Trang chủ</a></li>
+            <li key = {2}>
                 <p>
                     Thể loại
                 </p>
-                <ul style={{display:'none' ,padding:'0px'}}>
+                <ul className="subList">
                     {listTypeOfMovie}
                 </ul>
             </li>
-            <li>
+            <li key = {3}>
                 <p>
                     Quốc gia
                 </p>
-                <ul style={{ position:'fixed',padding:'0px'}}>
+                <ul className="subList">
                     {listCountry}
                 </ul>
             </li>
-            <li>
+            <li key = {4}>
                 <a href="/phimbo">Phim bộ</a>
             </li>
-            <li>
+            <li key = {5}>
                 <a href="/phimle">Phim lẻ</a>
             </li>
         </ul>

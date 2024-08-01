@@ -1,37 +1,38 @@
 import "./header.css"
 import logo from"../../assets/logo/logo.svg"
-import SelectBar from "./select-bar"
-function Icon(){
+import userIcon from "../../assets/icon/user-icon.svg"
+import { useRef } from "react"
+function Icon({iconClick}){
     return (
-        <div>
-            Icon
+        <div onClick={iconClick}>
+            <img src={userIcon}></img>
         </div>
     )
 }
-function Logo(){
+function Logo({logoClick}){
     return(
-        <div style={{display:'flex',gap:'10px'}}>
+        <div className="logo" onClick={logoClick}>
             <img src={logo} alt = "" className="img"/>
             <p>PHIM HAY</p>
         </div>
     )
 }
-function Search(){
+function Search({onKeyDown}){
+    const inputRef = useRef(null)
     return(
-        <div>
-            <input />
-            <button>Search</button>
+        <div className="search" onKeyDown={(e)=>onKeyDown(inputRef.current.value,e)}>
+            <input ref={inputRef}/>
+            {/* <button onClick={()=> buttonClick(inputRef.current.value )}>Search</button> */}
         </div>
     )
 }
 export default function Header(props){
-    // window.alert('a')
     return (
         <div className="header">
-            <div style={{display:'flex', justifyContent:'space-between'}}>
-                <Logo />
-                <Search />
-                <Icon />
+            <div className="top" >
+                <Logo logoClick={props.logoClick} />
+                <Search onKeyDown={props.onKeyDown}/>
+                <Icon iconClick={props.iconClick} />
             </div>
             {props.children}
         </div>

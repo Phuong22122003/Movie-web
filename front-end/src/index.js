@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Header from './components/commons/header';
 import "./index.css"
-import UserMasterPage from './page/user/user-master-page';
+import MasterPage from './MasterPage';
+import { BrowserRouter } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <UserMasterPage />
-  </React.StrictMode>
+  <BrowserRouter>
+    <MasterPage />
+  </BrowserRouter>
 );
 
 
