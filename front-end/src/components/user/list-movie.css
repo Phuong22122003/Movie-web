@@ -1,0 +1,41 @@
+.listMovie {
+    display: flex;
+    flex-wrap: wrap ;
+    gap: 10px;
+    justify-content: center;
+    margin: 10px 15px 10px;
+}
+  
+.item {
+    position: relative;
+    background-color: #242424;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 200px;
+    height: 200px;
+}
+.item:hover {
+    cursor: pointer;
+}
+.item img {
+    width: 100%;
+    height: 80%;
+}
+
+.item p { /* Renamed for clarity */
+    max-width: 150px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color:white;
+    
+}
+
+@media only screen and (max-width: 636px){
+    .item{
+        width: 140px;
+        height: 180px;
+    }
+}
