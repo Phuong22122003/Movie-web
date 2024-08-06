@@ -6,8 +6,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "USER")
-public class User {
+@Table(name = "WEBUSER")
+public class WebUser {
     @Id
     @Column(name = "USERNAME")
     private String username;
@@ -18,7 +18,9 @@ public class User {
     @Column(name = "ROLE")
     private String role;
 
-    public User() {
+    @Column(name = "EMAIL")
+    private String email;
+    public WebUser() {
     }
 
     public String getUsername() {
@@ -43,6 +45,14 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
     
 }
