@@ -1,23 +1,36 @@
 import icon from "./../../assets/icon/user-icon.svg"
-export default function CommentComponent({listComment}){
-  console.log(listComment)
-    const comments = listComment.map((comment)=>(
+import "./comment.css"
+import send from  "../../assets/common/send.svg"
+import { useRef, useState } from "react"
+export default function CommentComponent(props){
+  const [inputValue,setInputValue]=useState("")
+  const inputRef = useRef(null)
+  function onInputChange(e){
+      setInputValue(e.target.value);
+  }
+    const comments = props.listComment.map((comment)=>(
       <li>
-        <div style={{display:'flex',alignItems:'center'}}>
-            <img src={icon} style={{backgroundColor:'white', borderRadius:'50%'}}></img>
+        <div className="commentIcon" >
+            <img   src={icon} style={{backgroundColor:'white', borderRadius:'50%'}}></img>
             {comment.username}
 
         </div>
-        {comment.comment}
+        <p className="text">
+          {comment.comment}
+        </p>
       </li>
     ))
     return(
-      <div style={{height:'300px',backgroundColor:'#1e1e1e',display:'flex',flexDirection:'column'}}>
-          <ul style={{color:'white',listStyleType:'none'}}>
+      <div style={{minHeight:'300px',backgroundColor:'#1e1e1e',display:'flex',flexDirection:'column'}}>
+          <div className="comment-input-wrapper">
+            <input ref={inputRef} value={inputValue} placeholder="Add a comment" required  onChange={onInputChange} className="comment-input" ></input>
+            <span onClick={()=>props.sendComment(inputRef.current,setInputValue)}>
+              <img src={send} className="send"/>
+            </span>
+          </div>
+          <ul className="list-comment">
               {comments}
           </ul>
-          <input ></input>
-          <button>Comment</button>
       </div>
     )
 }
