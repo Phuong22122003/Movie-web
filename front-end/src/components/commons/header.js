@@ -21,7 +21,7 @@ function Search({onKeyDown}){
     const inputRef = useRef(null)
     return(
         <div className="search" onKeyDown={(e)=>onKeyDown(inputRef.current.value,e)}>
-            <input ref={inputRef}/>
+            <input className="header-input" ref={inputRef}/>
             {/* <button onClick={()=> buttonClick(inputRef.current.value )}>Search</button> */}
         </div>
     )

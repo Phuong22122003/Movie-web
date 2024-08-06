@@ -34,7 +34,7 @@
     display: flex;
     gap: 10px;
 }
-input{
+.header-input{
     width: 300px;
     border-radius: 20px;
     border: none;
@@ -46,7 +46,7 @@ input{
     .header .logo img{
         display: none;
     }
-    input{
+    .header-input{
         width: 200px;
     }
     
