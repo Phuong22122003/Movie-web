@@ -1,0 +1,56 @@
+.movies-added-wrapper{
+    padding-top:50px;
+    background-color:rgb(42, 41, 41);
+    width: 100%;
+    color: white;
+    /* height:calc(100vh - 160px); */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+.movies-added-wrapper .btnAdd{
+    position: absolute;
+    top:10px;
+    right:10px;
+    padding: 10px 30px 10px;
+    background-color: rgb(63, 130, 237);
+}
+.movies-added-wrapper .btnAdd:hover{
+    cursor: pointer;
+}
+.movies-added-wrapper .added-item{
+    height: 120px;
+    width: 80%;
+    padding: 0px 20px 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    border: 1px solid rgb(152, 152, 152); 
+}
+.movies-added-wrapper .added-item .image-name{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-right: solid 1px white;
+    padding-right: 10px;
+}
+.movies-added-wrapper .added-item .image-name .image{
+    width: 100px;
+    height: 110px;
+}
+.movies-added-wrapper .added-item .image-name p{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+}
+.movies-added-wrapper .added-item .image-name .icon:hover{
+    cursor: pointer;
+}
+
+.movies-added-wrapper .added-item .delete:hover{
+    cursor: pointer;
+}

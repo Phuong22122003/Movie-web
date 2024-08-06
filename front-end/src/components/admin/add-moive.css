@@ -1,0 +1,82 @@
+.upload{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+    height: 80%;
+    border-radius: 20px;
+    padding: 40px 20px 10px;
+    position: fixed;
+    background-color: rgb(68, 66, 66);
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    color: white;
+}
+.upload .cancle{
+    position: absolute;
+    right: 10px;
+    top: 1px;
+    color: white;
+}
+.upload .cancle:hover{
+    cursor: pointer;
+}
+.upload .infomation{
+    border-right: 1px solid white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding-right: 20px;
+}
+.upload .infomation input{
+    border-radius: 10px;
+    background-color:rgb(68, 66, 66);
+    border: 1px white solid;
+    height: 30px;
+    color: white;
+    width: 100%;
+}
+
+.upload .infomation select {
+    background-color:rgb(68, 66, 66);
+    color: white;
+    width: 300px;
+}
+.upload .infomation .btnSaveWrapper{
+    text-align: center;
+}
+.upload .infomation .btnSaveWrapper:hover{
+    cursor: pointer;
+}
+.upload .infomation .btnSaveWrapper .btnSave{
+    background-color: white;
+    color: black;
+    padding: 10px 20px 10px;
+    border-radius: 20px;
+}
+.upload .video-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 10px;
+    gap: 10px;
+}
+.upload .video-wrapper .input-img{
+    width: 85px;
+    border: none;
+    border-radius: 10px;
+    margin-left: 10px;
+}
+.upload .video-wrapper .video{
+    width: 300px;
+    height: 50%;
+}
+.upload .video-wrapper .thumbnail-image{
+    width: 275px;
+    height: 200px;
+}
+.upload .video-wrapper input{
+    border: 1px solid white;
+    background-color:rgb(68, 66, 66);
+}
