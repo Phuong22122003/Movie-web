@@ -1,0 +1,52 @@
+.profile-wrapper{
+    background-image: url('../../assets/common/profile.jpg'); 
+    background-size: cover; 
+    width: 100vw; 
+    /* height: 100vh; */
+    height:calc(100vh - 160px);
+    position: relative;
+}
+.text-wrapper{
+    display: flex;
+    flex-direction: column ;
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 3px 0px 20px 11px rgb(155 200 232 );
+    width: 300px;
+    height: 230px;
+    padding: 10px;
+    justify-content: center;
+    font-size: larger;
+}
+.video-control{
+    color: white;
+    padding: 10px 20px;
+    background-color: blueviolet;
+    width: 80%;
+    text-align: center;
+    border-radius: 10px;
+    margin-left: 10px;
+}
+.video-control:hover{
+    cursor: pointer;
+}
+.name{
+    color: white;
+}
+.name::before{
+    content: "Username: ";
+}
+.email{
+    color: white;
+}
+.email::before{
+    content: "Email: ";
+}
+.role{
+    color: white;
+}
+.role::before{
+    content: "Role: ";
+}
