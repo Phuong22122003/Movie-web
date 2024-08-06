@@ -1,6 +1,5 @@
 import "./list-movie.css"
 export default function ListMoviesComponent({listMovie,handleClick}){
-    console.log(listMovie)
     function handleClickInside(id){
         handleClick(id)
     }

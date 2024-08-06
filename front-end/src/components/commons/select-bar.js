@@ -1,7 +1,6 @@
 import "./select-bar.css"
 import "./default.css"
 export default function SelectBar(props) {
-    console.log(props)
     const listTypeOfMovie = props['typeOfMovie'].map((type,key) =>
         <li key={key}>
             <a href={type.link}>{type.name}</a>

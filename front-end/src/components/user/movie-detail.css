@@ -9,8 +9,8 @@
     display: flex;
 }
 .img-name-wrapper img {
-    width: 40%;
-    height: 300px;
+    max-width: 40%;
+    height: 400px;
 }
 .img-name-wrapper div{
     flex-grow: 1;
