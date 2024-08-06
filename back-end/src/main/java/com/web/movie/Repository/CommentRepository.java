@@ -10,6 +10,6 @@ import com.web.movie.Entity.Comment;
 import com.web.movie.Entity.CommentKey;
 
 public interface CommentRepository  extends JpaRepository<Comment,CommentKey>{
-    @Query("FROM Comment WHERE movieId=:movieId")
+    @Query("FROM Comment WHERE movieId=:movieId ORDER BY commentDate DESC")
     public List<Comment> findCommentsByMovieId(@Param("movieId") Integer movieId);
 }
