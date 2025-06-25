@@ -6,13 +6,14 @@ body{
     background-size: cover; 
     width: 100vw; 
     height: 100vh;
+    position: relative;
 }
 .login{
     background: rgba(255, 255, 255, 0.5);
-    position: fixed;
-    top: 40%;
-    left: 40%;
-    transform: translate(-15%, -30%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     display: flex;
     flex-direction: column;
     padding: 0px 50px 0px;
@@ -59,16 +60,14 @@ body{
 .login a{
     color: black;
 }
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 440px) {
     .login{
-        left: 0%;
-        top:0%;
-        width: 100%;
-        height: 100vh;
-        transform: none;
         border-radius: 0;
+        padding: 0px;
+        width: 90%;
     }
     .login input{
         min-width: 0px;
+        width: 300px;
     }
 }

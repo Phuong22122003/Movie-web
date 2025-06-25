@@ -1,44 +1,95 @@
 package com.web.movie.Entity;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "MOVIE")
+@Table(name = "Movie")
 public class Movie {
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer Id;
+    private Integer id;
 
-    @Column(name = "NAME")
+    @Column(name = "NAME",nullable = false)
     private String name;
 
-    @Column(name = "IMAGE_PATH")
-    private String imagePath;
+    @Column(name = "IMAGE_FILE_NAME",nullable = false)
+    private String imageFileName;
 
     @Column(name = "LENGTH")
     private Integer length;
 
-    @Column(name = "SOURCE")
-    private String source;
+    @Column(name = "VIDEO_FILE_NAME",nullable = false)
+    private String videoFileName;
 
     @Column(name = "DESCRIPTION")
     private String description;
+
+    @ManyToOne
+    @JoinColumn(name = "USER_ID")
+    private User user;
+
+    @ManyToMany
+    @JoinTable(
+        name = "Movie_Genre",
+        joinColumns = @JoinColumn(name="MOVIE_ID"),
+        inverseJoinColumns = @JoinColumn(name="GENRE_ID")
+    )
+    private List<Genre> genres;
+
+    @ManyToOne
+    @JoinColumn(name = "COUNTRY_ID")
+    private Country country;
+
+    @OneToMany(mappedBy = "movie",cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> comments;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<Genre> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(List<Genre> genres) {
+        this.genres = genres;
+    }
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
 
     public Movie() {
     }
 
     public Integer getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Integer id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getName() {
@@ -49,12 +100,12 @@ public class Movie {
         this.name = name;
     }
 
-    public String getImagePath() {
-        return imagePath;
+    public String getImageFileName() {
+        return imageFileName;
     }
 
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
+    public void setImageFileName(String imageFileName) {
+        this.imageFileName = imageFileName;
     }
 
     public Integer getLength() {
@@ -65,12 +116,12 @@ public class Movie {
         this.length = length;
     }
 
-    public String getSource() {
-        return source;
+    public String getVideoFileName() {
+        return videoFileName;
     }
 
-    public void setSource(String source) {
-        this.source = source;
+    public void setVideoFileName(String videoFileName) {
+        this.videoFileName = videoFileName;
     }
 
     public String getDescription() {
@@ -80,5 +131,13 @@ public class Movie {
     public void setDescription(String description) {
         this.description = description;
     }
-    
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
 }

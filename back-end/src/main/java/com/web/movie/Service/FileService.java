@@ -19,13 +19,9 @@ public class FileService {
     @Value("${file.upload-dir}")
     private String uploadDir;
 
-    @Value("${local.ip}")
-    private String localIp;
-
     public String saveImage(MultipartFile image) throws ImageException{
         if (image.isEmpty()) {
             ImageException imageException = new ImageException("Image is empty");
-            imageException.setIsEmpty(true);
             throw imageException;
         }
 
@@ -38,7 +34,7 @@ public class FileService {
             String name = Instant.now().getEpochSecond() +image.getOriginalFilename();
             Path filePath = Paths.get(uploadDir).resolve(name);
             Files.write(filePath, image.getBytes());
-            return "http://"+localIp +":8080/api/v1/resource/image/" + name;
+            return  name;
         } catch (IOException e) {
             throw new ImageException("Fail to save Image: " +e.getMessage());
         }
@@ -57,16 +53,13 @@ public class FileService {
             String name = Instant.now().getEpochSecond() +video.getOriginalFilename();
             Path filePath = Paths.get(uploadDir).resolve(name);
             Files.write(filePath, video.getBytes());
-            return "http://"+localIp+":8080/api/v1/resource/video/" + name;
+            return name;
         } catch (IOException e) {
             throw new VideoException("Fail to save video: " +e.getMessage());
         }
     }
-    public Boolean deletImage(String imagePath){
-        //config 
-        if(imagePath == null||!imagePath.contains("http://") || !imagePath.contains(":8080/api/v1/resource/")) return false;
-        String [] array = imagePath.split("/");
-        String name = array[array.length-1];
+    public Boolean deletImage(String name){
+   
         Path path = null;
         try {
             path = Paths.get(uploadDir,name);

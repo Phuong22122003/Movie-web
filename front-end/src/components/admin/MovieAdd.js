@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
-import "./add-moive.css"
+import "./MovieAdd.css"
 import cancle from "../../assets/common/cancle.svg"
-export default function AddMovie(props){
+export default function MovieAdd(props){
     const videoRef = useRef(null);
     const srcRef = useRef(null);
     const inputVideoRef = useRef(null)

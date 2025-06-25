@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.web.movie.Entity.Comment;
-import com.web.movie.Entity.WebUser;
+import com.web.movie.Entity.User;
 import com.web.movie.Service.CommentService;
 import com.web.movie.Service.UserService;
 
@@ -27,9 +27,6 @@ public class UserRestController {
     @PostMapping("/comment")
     public ResponseEntity<?> comment(@RequestBody Comment comment){
         Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
-        System.out.println(comment.getComment());
-        comment.setUsername(authentication.getName());
-        comment.setCommentDate(LocalDateTime.now());
         try {
             commentService.addComment(comment);
         } catch (Exception e) {
@@ -40,7 +37,7 @@ public class UserRestController {
     @GetMapping("/profile")
     public ResponseEntity<?> profile(){
         Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
-        WebUser user = userService.findUserByUsername(authentication.getName());
+        User user = userService.findUserByUsername(authentication.getName());
         user.setPassword(null);
         return ResponseEntity.ok().body(user);
     }

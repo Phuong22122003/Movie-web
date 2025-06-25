@@ -1,7 +1,12 @@
 ul{
     list-style-type: none;
 }
-
+.link-button{
+    background-color: rgb(43, 42, 42);  
+    color: white;
+    border: none;      
+    outline: none; 
+}
 
 .listItem{
     display:flex;

@@ -1,7 +1,13 @@
-import "./list-movie-added.css"
+import "./MovieList.css"
 import pen from "../../assets/common/pen.svg"
 import play from "../../assets/common/play.svg"
-export default function ListAddedMoviesComponent(props){
+import { useNavigate } from "react-router-dom";
+export default function MovieList(props){
+    const navigate = useNavigate();
+    function playVideo(id){
+        navigate('/movie/'+id)
+    }
+
     const listItem = props.movies.map((item,key)=>(
         <div className="added-item" key={key}>
             <div className = "image-name" >
@@ -9,7 +15,7 @@ export default function ListAddedMoviesComponent(props){
                 <div style = {{width:'200px'}}>
                     <p  >{item.name}</p>
                     <img className = "icon" src={pen} onClick={()=>props.btnEditMovieHandelClick(item)}></img>
-                    <img className = "icon" src={play} onClick={()=>props.playVideo(item.id)}></img>
+                    <img className = "icon" src={play} onClick={()=>playVideo(item.id)}></img>
                 </div>
             </div>
             <p>{item.description}</p>

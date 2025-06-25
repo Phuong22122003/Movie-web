@@ -1,26 +1,41 @@
 package com.web.movie.Entity;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "WEBUSER")
-public class WebUser {
+@Table(name = "[User]")
+public class User {
     @Id
-    @Column(name = "USERNAME")
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
+
+    @Column(name = "USERNAME",nullable = false)
     private String username;
 
-    @Column(name = "PASSWORD")
+    @Column(name = "PASSWORD",nullable = false)
     private String password;
 
-    @Column(name = "ROLE")
+    @Column(name = "ROLE",nullable = false)
     private String role;
 
-    @Column(name = "EMAIL")
+    @Column(name = "EMAIL",nullable = false)
     private String email;
-    public WebUser() {
+
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Movie> movie;
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> comments;
+    public User() {
     }
 
     public String getUsername() {

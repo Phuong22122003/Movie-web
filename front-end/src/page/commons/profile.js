@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import ProfileComponent from "../../components/commons/profile"
 import {useNavigate} from "react-router-dom"
 import { ip } from "../../utils/local-ip";
-import { GetCookie } from "../../utils/cookie";
+import { DeleteCookie, GetCookie, SetCookie } from "../../utils/cookie";
 export default function Profile(){
 
     const [userInfo,setUserInfo] = useState({})
@@ -32,7 +32,11 @@ export default function Profile(){
     function navigateUploadPage(){
         navigate("/upload")
     }
+    function logOut(){
+        DeleteCookie("jwt")
+        navigate("/login")
+    }
     return (
-        <ProfileComponent  handelClick={navigateUploadPage} info={userInfo}></ProfileComponent>
+        <ProfileComponent  movieManagement={navigateUploadPage} logoutHandle={logOut} info={userInfo}></ProfileComponent>
     )
 }

@@ -5,9 +5,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.web.movie.Entity.WebUser;
+import com.web.movie.Entity.User;
 @Repository
-public interface UserRepository extends JpaRepository<WebUser,String>{
-    @Query("FROM WebUser u where u.username=:username")
-    public WebUser findUserByUsername(@Param("username")String username);
+public interface UserRepository extends JpaRepository<User,String>{
+    @Query("FROM User u where u.username=:username")
+    public User findUserByUsername(@Param("username")String username);
 }

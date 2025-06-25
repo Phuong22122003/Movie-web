@@ -33,3 +33,10 @@ export function CheckCookie() {
     }
 }
 
+export function DeleteCookie(cname) {
+    // Thiết lập ngày hết hạn cookie trong quá khứ
+    const d = new Date();
+    d.setTime(d.getTime() - 1);
+    let expires = "expires=" + d.toUTCString();
+    document.cookie = cname + "=;" + expires + ";path=/";
+}

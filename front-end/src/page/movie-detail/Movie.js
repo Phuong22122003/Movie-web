@@ -1,11 +1,11 @@
 import { useNavigate, useParams } from "react-router-dom";
 import MovieDetailComponent from "../../components/user/movie-detail";
-import ListMovies from "./list-movies";
 import CommentComponent from "../../components/user/comment";
 import MovieComponent from "../../components/user/movie";
 import { useEffect, useState } from "react";
 import { ip } from "../../utils/local-ip";
 import { GetCookie } from "../../utils/cookie";
+import MovieList from "../home/MovieList";
 
 export default function Movie(){
     const navigate = useNavigate()
@@ -17,7 +17,7 @@ export default function Movie(){
     let isFirstReder = true;
     useEffect(()=>{
         if(isFirstReder)
-        fetch(`http://${ip}:8080/api/v1/movie/get?id=${id}`)
+        fetch(`http://${ip}:8080/api/v1/movies/get?id=${id}`)
         .then(respone=>respone.json())
         .then((data)=>{
             setMovie(data)
@@ -94,7 +94,7 @@ export default function Movie(){
             }
 
             <h2 style={{color:'white'}}>Có thể bạn cũng thích</h2>
-            {!isLoading&&<ListMovies url={`http://${ip}:8080/api/v1/movie/list-movie?genre=${movie.genre}&id=${id}`} ></ListMovies>}
+            {!isLoading&&<MovieList></MovieList>}
             
         </div>
     )

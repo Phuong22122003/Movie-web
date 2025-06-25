@@ -1,27 +1,29 @@
 package com.web.movie.Entity;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "GENRES")
-public class Genres {
+@Table(name = "Genre")
+public class Genre {
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "NAME")
+    @Column(name = "NAME",nullable = false)
     private String name;
     
-    @Column(name = "PATH")
-    private String path;
-    public Genres() {
-    }
+    @ManyToMany(mappedBy = "genres")
+    private List<Movie> movies;
+
 
     public Integer getId() {
         return id;
@@ -40,14 +42,13 @@ public class Genres {
         this.name = name;
     }
 
-    public String getPath() {
-        return path;
+    public List<Movie> getMovies() {
+        return movies;
     }
 
-    public void setPath(String path) {
-        this.path = path;
+    public void setMovies(List<Movie> movies) {
+        this.movies = movies;
     }
-    
 
     
 }

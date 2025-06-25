@@ -35,7 +35,12 @@
 
 @media only screen and (max-width: 636px){
     .item{
-        width: 140px;
-        height: 200px;
+        width: 43vw;
+        height: 250px;
+    }
+    .item p{
+        max-width: 100px;
+        font-size: small;
+        white-space: wrap;
     }
 }

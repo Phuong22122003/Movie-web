@@ -15,7 +15,7 @@
     transform: translate(-50%, -50%);
     box-shadow: 3px 0px 20px 11px rgb(155 200 232 );
     width: 300px;
-    height: 230px;
+    height: fit-content;
     padding: 10px;
     justify-content: center;
     font-size: larger;
@@ -28,14 +28,15 @@
     text-align: center;
     border-radius: 10px;
     margin-left: 10px;
+    margin-top: 10px;
 }
 .video-control:hover{
     cursor: pointer;
 }
-.name{
+.username{
     color: white;
 }
-.name::before{
+.username::before{
     content: "Username: ";
 }
 .email{

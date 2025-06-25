@@ -27,15 +27,20 @@ import com.web.movie.Jwt.JwtAuthenticationFilter;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+    private static final String[] publicApi = {
+        "/api/v1/movies/**",
+        "/api/v1/countries/**",
+        "/api/v1/genres/**",
+        "/api/v1/resource/**",
+        "/api/v1/authenticate/*"
+    };
+
     @Autowired private JwtAuthenticationFilter jwtAuthenticationFilter;
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception{
         httpSecurity.authorizeHttpRequests((request)->request
-            .requestMatchers("/api/v1/movie/**").permitAll()
-            // .requestMatchers("/api/v1/user/**").permitAll()
-            .requestMatchers("/api/v1/resource/**").permitAll()
-            .requestMatchers("/api/v1/manage/**").permitAll() //.hasAuthority("ADMIN")
-            .requestMatchers("/api/v1/authenticate/*").permitAll()
+            .requestMatchers("/api/v1/manage/**").hasAuthority("ADMIN")
+            .requestMatchers(publicApi).permitAll()
             .anyRequest().authenticated()
         )
         .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)

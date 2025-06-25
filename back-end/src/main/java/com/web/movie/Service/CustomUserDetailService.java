@@ -9,24 +9,20 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.web.movie.Repository.UserRepository;
 @Service
 public class CustomUserDetailService implements UserDetailsService{
-    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     @Autowired private UserRepository userRepository;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
-        com.web.movie.Entity.WebUser webUser = userRepository.findUserByUsername(username);
+        com.web.movie.Entity.User webUser = userRepository.findUserByUsername(username);
         if(webUser==null) throw new UsernameNotFoundException("Not found");
         else {
             List<GrantedAuthority> authorities = new ArrayList<>();
-            authorities.add(new SimpleGrantedAuthority(webUser.getRole()));
-            return new User(webUser.getUsername(), passwordEncoder.encode(webUser.getPassword()), authorities);
+            authorities.add(new SimpleGrantedAuthority(webUser.getRole().trim().toUpperCase()));
+            return new User(webUser.getUsername(), webUser.getPassword(), authorities);
         }
-        // throw new UsernameNotFoundException("Not found");
     }
 }
