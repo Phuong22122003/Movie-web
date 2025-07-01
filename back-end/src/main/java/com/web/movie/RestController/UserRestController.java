@@ -9,6 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.web.movie.Dto.UserDto;
 import com.web.movie.Entity.Comment;
 import com.web.movie.Entity.User;
 import com.web.movie.Service.CommentService;
@@ -35,10 +36,9 @@ public class UserRestController {
         return ResponseEntity.ok().body(comment);
     }
     @GetMapping("/profile")
-    public ResponseEntity<?> profile(){
+    public ResponseEntity<UserDto> profile(){
         Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByUsername(authentication.getName());
-        user.setPassword(null);
+        UserDto user = userService.findUserByUsername(authentication.getName());
         return ResponseEntity.ok().body(user);
     }
 }

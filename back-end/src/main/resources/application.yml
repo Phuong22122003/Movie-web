@@ -1,0 +1,29 @@
+# Conversion to YAML from Properties formar report
+# Warnings:
+# - The yaml file had comments which are lost in the refactoring!
+spring:
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;databaseName=Movie;encrypt=true;trustServerCertificate=true
+    username: sa
+    password: 123456789
+  application:
+    name: movie
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+file:
+  upload-dir: File
+local:
+  ip: localhost
+app:
+  jwt:
+    secret-key: '"phuong"'
+    duration: 604800000
+springdoc:
+  override-with-generic-response: false

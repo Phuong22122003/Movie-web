@@ -1,4 +1,4 @@
-package com.web.movie.Security;
+package com.web.movie.Config;
 
 
 
@@ -20,8 +20,6 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import com.web.movie.Jwt.JwtAuthenticationFilter;
-
 
 
 @Configuration
@@ -32,8 +30,11 @@ public class SecurityConfig {
         "/api/v1/countries/**",
         "/api/v1/genres/**",
         "/api/v1/resource/**",
-        "/api/v1/authenticate/*"
-    };
+        "/api/v1/authenticate/**",
+        "/v3/api-docs/**",
+        "/swagger-ui/**",
+        "/swagger-ui.html"
+    };  
 
     @Autowired private JwtAuthenticationFilter jwtAuthenticationFilter;
     @Bean
@@ -46,7 +47,6 @@ public class SecurityConfig {
         .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
         .csrf((crsf)->crsf.disable())
         .cors((cors)->cors.configurationSource(corsConfigurationSource()));
-        // .cors((cors)->cors.configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues()));
         return httpSecurity.build();
     }
 

@@ -15,7 +15,7 @@ import com.web.movie.Repository.GenreRepository;
 @RequestMapping("/api/v1/genres")
 public class GenreRestController {
     @Autowired private GenreRepository genreRepository;
-    @GetMapping("list")
+    @GetMapping("")
     public ResponseEntity<List<Genre>> findGenres(){
         return ResponseEntity.ok().body(genreRepository.findAll());
     }

@@ -8,15 +8,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.web.movie.Entity.Country;
-import com.web.movie.Repository.CountryRepository;
+import com.web.movie.Dto.CountryDto;
+import com.web.movie.Service.CountryService;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/api/v1/countries")
+@Tag(name = "Countries")
 public class CountryRestController {
-    @Autowired private CountryRepository countryRepository;
-    @GetMapping("/list")
-    public ResponseEntity<List<Country>> findCountries(){
-        return ResponseEntity.ok().body(countryRepository.findAll());
+    @Autowired private CountryService countryService;
+    @GetMapping("")
+    @Operation(summary = "Get all countries")
+    public ResponseEntity<List<CountryDto>> findCountries(){
+        return ResponseEntity.ok().body(countryService.getAllCountries());
     }
 }

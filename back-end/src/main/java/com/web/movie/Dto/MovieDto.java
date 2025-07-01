@@ -2,36 +2,25 @@ package com.web.movie.Dto;
 
 import java.util.List;
 
-import com.web.movie.Entity.Comment;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class MovieDto {
+    private String id;
+    private String imageFileName;
     private String name;
-    private Integer genre;
-    private String source;
-    private List<Comment> listComment;
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public Integer getGenre() {
-        return genre;
-    }
-    public void setGenre(Integer genre) {
-        this.genre = genre;
-    }
-    public String getSource() {
-        return source;
-    }
-    public void setSource(String source) {
-        this.source = source;
-    }
-    public List<Comment> getListComment() {
-        return listComment;
-    }
-    public void setListComment(List<Comment> listComment) {
-        this.listComment = listComment;
-    }
-    
+    private String description;
+    private String videoFileName;
+    private List<CommentDto> comments;
+    private List<GenreDto> genres;
+    private UserDto user;
+    private CountryDto country;
 }

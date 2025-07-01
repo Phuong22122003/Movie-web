@@ -32,7 +32,7 @@ public class Comment {
     private Movie movie;
 
     @Column(name = "COMMENTED_AT",nullable = false)
-    private LocalDateTime commentedAt;
+    private LocalDateTime commentAt;
 
     @Column(name = "COMMENT",nullable = false)
     private String comment;
@@ -56,10 +56,10 @@ public class Comment {
         this.movie = movie;
     }
     public LocalDateTime getCommentedAt() {
-        return commentedAt;
+        return commentAt;
     }
     public void setCommentedAt(LocalDateTime commentedAt) {
-        this.commentedAt = commentedAt;
+        this.commentAt = commentedAt;
     }
     public Comment() {
     }

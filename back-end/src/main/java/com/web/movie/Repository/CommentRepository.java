@@ -9,6 +9,6 @@ import org.springframework.data.repository.query.Param;
 import com.web.movie.Entity.Comment;
 
 public interface CommentRepository  extends JpaRepository<Comment,String>{
-    @Query("FROM Comment c WHERE c.movie.id=:movieId ORDER BY commentedAt DESC")
+    @Query("FROM Comment c WHERE c.movie.id=:movieId ORDER BY commentAt DESC")
     public List<Comment> findCommentsByMovieId(@Param("movieId") Integer movieId);
 }

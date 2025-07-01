@@ -1,4 +1,4 @@
-package com.web.movie.Service;
+package com.web.movie.Config;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,13 +11,14 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.web.movie.CustomException.NotFoundException;
 import com.web.movie.Repository.UserRepository;
 @Service
 public class CustomUserDetailService implements UserDetailsService{
     @Autowired private UserRepository userRepository;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
-        com.web.movie.Entity.User webUser = userRepository.findUserByUsername(username);
+        com.web.movie.Entity.User webUser = userRepository.findByUsername(username).orElseThrow(()->new NotFoundException("User not found"));
         if(webUser==null) throw new UsernameNotFoundException("Not found");
         else {
             List<GrantedAuthority> authorities = new ArrayList<>();

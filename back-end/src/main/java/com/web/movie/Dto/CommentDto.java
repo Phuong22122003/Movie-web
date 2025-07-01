@@ -1,19 +1,15 @@
 package com.web.movie.Dto;
 
+import java.time.LocalDateTime;
+
+import lombok.Builder;
+import lombok.Data;
+
+@Data
+@Builder
 public class CommentDto {
-    private String name;
+    private String id;
     private String comment;
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public String getComment() {
-        return comment;
-    }
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
-    
+    private LocalDateTime commentAt;
+    MovieDto movie;
 }

@@ -1,25 +1,30 @@
-package com.web.movie.Jwt;
+package com.web.movie.Config;
 
 import java.util.Date;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.*;
 @Component  
 public class JwtTokenProvider {
-    private final String  secret_key = "phuong";
-    private final long expiration = 604800000L;
+    @Value("${app.jwt.secret-key}")
+    private String  secret_key;
+    @Value("${app.jwt.duration}")
+    private long expiration;
 
-    public String generateToken(String username){
+    public String generateToken(String userId){
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + expiration);
         return Jwts.builder()
-                .setSubject(username)
+                .setIssuer("Phương đẹp trai")
+                .setSubject(userId)
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
                 .signWith(SignatureAlgorithm.HS512,secret_key)
                 .compact();
         }
-    public String getUserNameFromJWT(String token){
+    public String getUserIdFromJwt(String token){
         Claims claims = Jwts.parser()
                             .setSigningKey(secret_key)
                             .parseClaimsJws(token)
