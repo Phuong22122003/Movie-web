@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = "movie-image:latest"
-        CONTAINER_NAME = "movie-api"
-        PORT = "80"
+        IMAGE_NAME = 'movie-image:latest'
+        CONTAINER_NAME = 'movie-api'
+        PORT = '80'
     }
 
     stages {
@@ -18,7 +18,7 @@ pipeline {
             steps {
                 script {
                     sh "docker build -t ${IMAGE_NAME} back-end"
-                    // docker.build(IMAGE_NAME)
+                // docker.build(IMAGE_NAME)
                 }
             }
         }
@@ -26,12 +26,16 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    // Stop and remove old container if it exists
                     sh "docker rm -f ${CONTAINER_NAME} || true"
 
-                    // Run the new container
                     sh """
-                        docker run -d --name ${CONTAINER_NAME} -p ${PORT}:${PORT} ${IMAGE_NAME}
+                        docker run -d --name ${CONTAINER_NAME} -p ${PORT}:${PORT} \\
+                        -e PORT=${PORT} \\
+                        -e DB_CONNECTION_URL="jdbc:sqlserver://host.docker.internal:1433;databaseName=Movie;encrypt=true;trustServerCertificate=true" \\
+                        -e DB_CONNECTION_USERNAME=sa \\
+                        -e DB_CONNECTION_PASSWORD=123456789 \\
+                        -e UPLOAD_DIR=File \\
+                        ${IMAGE_NAME}
                     """
                 }
             }
@@ -40,10 +44,10 @@ pipeline {
 
     post {
         success {
-            echo "✅ App is deployed and running at http://<your-jenkins-ip>:${PORT}"
+            echo "App is deployed and running at http://<your-jenkins-ip>:${PORT}"
         }
         failure {
-            echo "❌ Build or deployment failed"
+            echo 'Build or deployment failed'
         }
     }
 }

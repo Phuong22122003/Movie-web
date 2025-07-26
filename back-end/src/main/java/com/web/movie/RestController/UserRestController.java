@@ -8,30 +8,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.web.movie.Dto.response.UserDto;
-import com.web.movie.Entity.Comment;
-import com.web.movie.Service.CommentService;
 import com.web.movie.Service.UserService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
 @RequestMapping("/api/v1/user")
+@Tag(name="UserController")
 public class UserRestController {
-    @Autowired private CommentService commentService;
     @Autowired private UserService userService;
-    @PostMapping("/comment")
-    public ResponseEntity<?> comment(@RequestBody Comment comment){
-        Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
-        try {
-            commentService.addComment(comment);
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError().body("Can comment");
-        }
-        return ResponseEntity.ok().body(comment);
-    }
+
     @GetMapping("/profile")
     public ResponseEntity<UserDto> profile(){
         Authentication authentication= SecurityContextHolder.getContext().getAuthentication();

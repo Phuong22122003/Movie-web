@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.web.movie.Entity.Genre;
 import com.web.movie.Repository.GenreRepository;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/api/v1/genres")
+@Tag(name = "GenreController")
 public class GenreRestController {
     @Autowired private GenreRepository genreRepository;
     @GetMapping("")

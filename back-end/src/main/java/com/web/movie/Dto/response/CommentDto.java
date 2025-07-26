@@ -1,8 +1,6 @@
-package com.web.movie.Dto;
+package com.web.movie.Dto.response;
 
 import java.time.LocalDateTime;
-
-import com.web.movie.Dto.response.UserDto;
 
 import lombok.Builder;
 import lombok.Data;

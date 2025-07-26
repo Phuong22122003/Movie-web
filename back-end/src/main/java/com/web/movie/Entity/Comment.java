@@ -11,11 +11,15 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
+import lombok.Builder;
+import lombok.Data;
 
 @Entity
 @Table(
     name = "Comment",
     uniqueConstraints = @UniqueConstraint(columnNames = {"USER_ID","MOVIE_ID","COMMENTED_AT"}))
+@Data
+@Builder
 public class Comment {
 
     @Id
@@ -33,31 +37,6 @@ public class Comment {
     @Column(name = "COMMENT",nullable = false)
     private String comment;
 
-    public String getId() {
-        return id;
-    }
-    public void setId(String id) {
-        this.id = id;
-    }
-    public User getUser() {
-        return user;
-    }
-    public void setUser(User user) {
-        this.user = user;
-    }
-    public LocalDateTime getCommentedAt() {
-        return commentAt;
-    }
-    public void setCommentedAt(LocalDateTime commentedAt) {
-        this.commentAt = commentedAt;
-    }
-    public Comment() {
-    }
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
+    @Column(name = "MOVIE_ID",nullable = false)
+    private Integer movieId;
 }
