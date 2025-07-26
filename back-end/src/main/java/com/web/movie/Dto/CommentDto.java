@@ -2,6 +2,8 @@ package com.web.movie.Dto;
 
 import java.time.LocalDateTime;
 
+import com.web.movie.Dto.response.UserDto;
+
 import lombok.Builder;
 import lombok.Data;
 
@@ -11,5 +13,5 @@ public class CommentDto {
     private String id;
     private String comment;
     private LocalDateTime commentAt;
-    MovieDto movie;
+    private UserDto user;
 }

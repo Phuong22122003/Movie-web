@@ -1,14 +1,10 @@
 package com.web.movie.Entity;
 
-import java.util.List;
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -19,7 +15,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @Column(name = "USERNAME",nullable = false)
+    @Column(name = "USERNAME",nullable = false, unique = true)
     private String username;
 
     @Column(name = "PASSWORD",nullable = false)
@@ -28,13 +24,9 @@ public class User {
     @Column(name = "ROLE",nullable = false)
     private String role;
 
-    @Column(name = "EMAIL",nullable = false)
+    @Column(name = "EMAIL",nullable = false,unique = true)
     private String email;
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<Movie> movies;
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Comment> comments;
     public User() {
     }
 
@@ -76,22 +68,6 @@ public class User {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public List<Movie> getMovies() {
-        return movies;
-    }
-
-    public void setMovies(List<Movie> movies) {
-        this.movies = movies;
-    }
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
     }
     
 }

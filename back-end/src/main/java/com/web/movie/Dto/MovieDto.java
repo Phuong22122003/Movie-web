@@ -3,6 +3,7 @@ package com.web.movie.Dto;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.web.movie.Dto.response.UserDto;
 
 import lombok.Builder;
 import lombok.Data;
@@ -19,7 +20,6 @@ public class MovieDto {
     private String name;
     private String description;
     private String videoFileName;
-    private List<CommentDto> comments;
     private List<GenreDto> genres;
     private UserDto user;
     private CountryDto country;

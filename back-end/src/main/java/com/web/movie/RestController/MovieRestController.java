@@ -11,34 +11,34 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.web.movie.Dto.MovieDto;
-import com.web.movie.Entity.Movie;
 import com.web.movie.Service.MovieService;
+
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/api/v1/movies")
+@Tag(name = "MovieController")
 public class MovieRestController {
     @Autowired private MovieService movieService;
-    @GetMapping("/all")
-    public ResponseEntity<List<Movie>> getListMovie(@RequestParam(required = false,defaultValue = "0") Integer id){
-    
-        return ResponseEntity.ok().body(movieService.findMoviesByGenreID(id));
+    @GetMapping()
+    public ResponseEntity<List<MovieDto>> getListMovie(@RequestParam(name = "offset",defaultValue = "0") int offset,
+                                                    @RequestParam(name = "limit",defaultValue = "10")int limit){
+        return ResponseEntity.ok().body(movieService.findMovies(offset, limit));
     }
 
-    @GetMapping("/quocgia/{country}")
-    public ResponseEntity<List<Movie>> findListMovieByCountry(@PathVariable("country") String country){
-        return ResponseEntity.ok().body(movieService.findMoviesByCountry(country));
+    @GetMapping("/country/{name}")
+    public ResponseEntity<List<MovieDto>> findListMovieByCountry(@PathVariable("name") String country
+    ,@RequestParam(name = "offset",defaultValue = "0") int offset, 
+    @RequestParam(name = "limit", defaultValue = "10") int limit){
+        return ResponseEntity.ok().body(movieService.findMoviesByCountry(country,offset,limit));
     }
     
-    @GetMapping("/detail")
-    public ResponseEntity<Movie> findMovieById(@RequestParam("id") Integer id){
+    @GetMapping("/{id}")
+    public ResponseEntity<MovieDto> findMovieById(@PathVariable("id") Integer id){
         return ResponseEntity.ok().body(movieService.findMovieById(id));
     }
-    @GetMapping("/get")
-    public ResponseEntity<MovieDto> findMovieDetailById(@RequestParam("id") Integer id){
-        return ResponseEntity.ok().body(movieService.findMovieDetailById(id));
-    }
     @GetMapping("/search")
-    public ResponseEntity<List<Movie>> searchMovie(@RequestParam("keyword") String keyword){
-        return ResponseEntity.ok().body(movieService.seachMovie(keyword));
+    public ResponseEntity<List<MovieDto>> searchMovie(@RequestParam("keyword") String keyword){
+        return ResponseEntity.ok().body(movieService.searchMovies(keyword));
     }
 }

@@ -27,10 +27,6 @@ public class Comment {
     @JoinColumn(name = "USER_ID",nullable = false)
     private User user;
     
-    @ManyToOne
-    @JoinColumn(name = "MOVIE_ID",nullable = false)
-    private Movie movie;
-
     @Column(name = "COMMENTED_AT",nullable = false)
     private LocalDateTime commentAt;
 
@@ -48,12 +44,6 @@ public class Comment {
     }
     public void setUser(User user) {
         this.user = user;
-    }
-    public Movie getMovie() {
-        return movie;
-    }
-    public void setMovie(Movie movie) {
-        this.movie = movie;
     }
     public LocalDateTime getCommentedAt() {
         return commentAt;

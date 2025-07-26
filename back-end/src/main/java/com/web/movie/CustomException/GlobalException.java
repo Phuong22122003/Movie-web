@@ -12,7 +12,7 @@ import com.web.movie.Dto.ResponseDto;
 public class GlobalException {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(BadRequestException.class)
-    public ResponseEntity<ResponseDto> handlerBadRequest(BadRequestException ex){
+    public ResponseEntity<ResponseDto<?>> handlerBadRequest(BadRequestException ex){
         return ResponseEntity.badRequest().body(
             ResponseDto.builder()
             .code(HttpStatus.BAD_REQUEST.value())

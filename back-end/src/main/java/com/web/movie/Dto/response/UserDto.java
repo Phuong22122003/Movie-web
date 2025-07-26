@@ -1,6 +1,5 @@
-package com.web.movie.Dto;
+package com.web.movie.Dto.response;
 
-import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -14,5 +13,5 @@ public class UserDto {
     private String id;
     private String username;
     private String email;
-    private List<MovieDto> movies;
+    private String role;
 }

@@ -2,7 +2,6 @@ package com.web.movie.Entity;
 
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,7 +11,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -53,9 +51,6 @@ public class Movie {
     @ManyToOne
     @JoinColumn(name = "COUNTRY_ID")
     private Country country;
-
-    @OneToMany(mappedBy = "movie",cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Comment> comments;
 
     public User getUser() {
         return user;
@@ -131,13 +126,4 @@ public class Movie {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
-
 }

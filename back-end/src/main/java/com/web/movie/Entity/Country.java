@@ -1,12 +1,11 @@
 package com.web.movie.Entity;
 
-import java.util.List;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -14,13 +13,12 @@ import jakarta.persistence.Table;
 public class Country {
     @Id
     @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
+    
     @Column(name = "COUNTRY_NAME",nullable = false)
     private String name;
     
-    @OneToMany(mappedBy = "country",cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Movie> movies;
-
     public Country() {
     }
     public String getId() {
@@ -34,13 +32,5 @@ public class Country {
     }
     public void setName(String name) {
         this.name = name;
-    }
-    public List<Movie> getMovies() {
-        return movies;
-    }
-    public void setMovies(List<Movie> movies) {
-        this.movies = movies;
-    }
-
-    
+    }    
 }
