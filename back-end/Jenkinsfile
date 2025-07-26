@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = "movie-image"
+        IMAGE_NAME = "movie-image:latest"
         CONTAINER_NAME = "movie-api"
         PORT = "80"
     }
@@ -17,7 +17,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build(IMAGE_NAME)
+                    sh "docker build -t${IMAGE_NAME}"
+                    // docker.build(IMAGE_NAME)
                 }
             }
         }
