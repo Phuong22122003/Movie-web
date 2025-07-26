@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'git@github.com:Phuong22122003/Movie-web.git'
+                git branch: 'main', url: 'https://github.com/Phuong22122003/Movie-web.git'
             }
         }
 
