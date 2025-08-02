@@ -12,7 +12,7 @@ export class AuthenticationService {
     login(param:Login):Observable<any>{
         return this.http.post(this.url+'/login',param);
     }
-    sigup(param: any){
+    sigup(param: any): Observable<any>{
         return this.http.post(this.url+'/sigup',param);
     }
     logout(){

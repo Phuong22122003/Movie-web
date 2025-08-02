@@ -5,6 +5,8 @@ import { MovieComponent } from './pages/movie/movie.component';
 import { LoginComponent } from './pages/login/login.component';
 import { SigupComponent } from './pages/sigup/sigup.component';
 import { authGuard } from './service/auth.guard';
+import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { MovieAdminComponent } from './pages/movie-admin/movie-admin.component';
 
 export const routes: Routes = [
     {
@@ -24,6 +26,16 @@ export const routes: Routes = [
                 path: "",
                 redirectTo: "home",
                 pathMatch: "full"
+            }
+        ],
+    },
+    {
+        path:"admin",
+        component: AdminLayoutComponent,
+        children:[
+            {
+                path: "movie",
+                component: MovieAdminComponent
             }
         ],
     },

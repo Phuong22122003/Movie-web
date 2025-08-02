@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { AuthenticationService } from '../../service/authentication';
+import { AuthenticationService } from '../../service/authentication.service';
 
 @Component({
   selector: 'app-header',

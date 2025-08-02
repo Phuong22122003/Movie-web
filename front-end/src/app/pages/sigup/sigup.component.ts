@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AuthenticationService } from '../../service/authentication';
+import { AuthenticationService } from '../../service/authentication.service';
 import { Router, RouterLink } from '@angular/router';
 @Component({
   selector: 'app-sigup',

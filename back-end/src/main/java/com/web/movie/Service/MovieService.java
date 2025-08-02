@@ -2,16 +2,13 @@ package com.web.movie.Service;
 
 import java.util.List;
 
-import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.web.movie.CustomException.NotFoundException;
 import com.web.movie.Dto.MovieDto;
-import com.web.movie.Dto.ResponseDto;
 import com.web.movie.Dto.request.MovieRequestDto;
 import com.web.movie.Entity.Country;
 import com.web.movie.Entity.Genre;

@@ -10,6 +10,7 @@ import com.web.movie.Entity.Movie;
 
 @Mapper(componentModel="spring")
 public interface MovieMapper {
+
     MovieDto toMovieDto(Movie movie);
     Movie toMovie(MovieRequestDto movie);
     List<MovieDto> toMovieDtos(List<Movie> movies);

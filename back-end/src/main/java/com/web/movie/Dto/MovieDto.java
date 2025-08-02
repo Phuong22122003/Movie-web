@@ -16,10 +16,10 @@ import lombok.AllArgsConstructor;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class MovieDto {
     private int id;
-    private String imageFileName;
+    private String image_url;
     private String name;
     private String description;
-    private String videoFileName;
+    private String movie_url;
     private List<GenreDto> genres;
     private UserDto user;
     private CountryDto country;
