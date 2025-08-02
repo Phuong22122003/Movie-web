@@ -9,6 +9,6 @@ import lombok.Data;
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class GenreDto {
-    private String id;
+    private int id;
     private String name;
 }

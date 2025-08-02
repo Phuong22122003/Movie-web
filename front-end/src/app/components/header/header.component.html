@@ -1,0 +1,78 @@
+<div
+  class="flex flex-row items-center justify-center sm:gap-4 md:gap-6 lg:gap-8 xl:gap-10 bg-black py-8 text-white"
+>
+  <div>
+    <ul
+      class="flex flex-row items-center justify-center sm:gap-2 md:gap-4 lg:gap-6 xl:gap-8"
+    >
+      <li><a routerLink="/home">Home</a></li>
+      <li class="relative group cursor-pointer text-white hover:text-gray-400">
+        Genre
+        <!-- Dropdown Menu -->
+        <ul
+          class="absolute top-full left-0 mt-0 hidden group-hover:flex flex-col bg-white text-black rounded shadow-lg z-50 min-w-[160px] max-h-[300px] overflow-y-auto py-2"
+        >
+          <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Action</li>
+          <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Adventure</li>
+          <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Drama</li>
+          <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Horror</li>
+          <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Sci-Fi</li>
+          <!-- Add more items as needed -->
+        </ul>
+      </li>
+
+      <li class="relative group cursor-pointer text-white hover:text-gray-400">
+        Country
+        <!-- Dropdown Menu -->
+        <ul
+          class="absolute top-full left-0 mt-0 hidden group-hover:flex flex-col bg-white text-black rounded shadow-lg z-50 min-w-[160px] max-h-[300px] overflow-y-auto py-2"
+        >
+          <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Action</li>
+          <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Adventure</li>
+          <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Drama</li>
+          <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Horror</li>
+          <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Sci-Fi</li>
+          <!-- Add more items as needed -->
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <div
+    class="flex items-center lg:w-[416px] bg-white rounded-full text-black px-3 py-2"
+  >
+    <input
+      type="text"
+      placeholder="Search movies ..."
+      class="flex-grow focus:border-0 focus:outline-none focus:ring-0"
+    />
+    <div class="cursor-pointer">
+      <i class="fa-solid fa-magnifying-glass"></i>
+    </div>
+  </div>
+  <div>
+    <ul
+      class="flex flex-row items-center justify-center sm:gap-2 md:gap-4 lg:gap-6 xl:gap-8"
+    >
+      <li>Movies</li>
+      <li>Series</li>
+      <li>Animation</li>
+    </ul>
+  </div>
+  <div>
+    <ul
+      class="flex flex-row items-center justify-center sm:gap-2 md:gap-4 lg:gap-6 xl:gap-8"
+    >
+
+      <ng-container *ngIf="isLoggedIn==false">
+        <li><a routerLink="/login">Login</a></li>
+        <li><a routerLink="/sigup">Sign Up</a></li>
+      </ng-container>
+      <ng-container *ngIf="isLoggedIn==true">
+        <li (click)="logout()">Logout</li>
+      </ng-container>
+      <li>
+        <i class="fa-solid fa-bell"></i>
+      </li>
+    </ul>
+  </div>
+</div>

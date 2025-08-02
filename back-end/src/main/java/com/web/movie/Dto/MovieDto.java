@@ -15,7 +15,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class MovieDto {
-    private String id;
+    private int id;
     private String imageFileName;
     private String name;
     private String description;
