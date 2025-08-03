@@ -2,9 +2,13 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = 'movie-image:latest'
-        CONTAINER_NAME = 'movie-api'
-        PORT = '80'
+        BACKEND_IMAGE = 'movie-api:latest'
+        BACKEND_CONTAINER = 'movie-api'
+        BACKEND_PORT = '80'
+
+        FRONTEND_IMAGE = 'movie-ui:latest'
+        FRONTEND_CONTAINER = 'movie-ui'
+        FRONTEND_PORT = '4200'
     }
 
     stages {
@@ -17,8 +21,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh "docker build -t ${IMAGE_NAME} back-end"
-                // docker.build(IMAGE_NAME)
+                    sh "docker build --tag ${BACKEND_IMAGE} back-end"
+                    sh "docker build --tag ${FRONTEND_IMAGE} fron-end"
                 }
             }
         }
@@ -26,17 +30,20 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    sh "docker rm -f ${CONTAINER_NAME} || true"
+                    sh "docker rm -f ${BACKEND_CONTAINER} || true"
+                    sh "docker rm -f ${FRONTEND_CONTAINER} || true"
 
                     sh """
-                        docker run -d --name ${CONTAINER_NAME} -p ${PORT}:${PORT} \\
-                        -e PORT=${PORT} \\
+                        docker run -d --name ${BACKEND_CONTAINER} -p ${BACKEND_PORT}:${BACKEND_PORT} \\
+                        -e PORT=${BACKEND_PORT} \\
                         -e DB_CONNECTION_URL="jdbc:sqlserver://host.docker.internal:1433;databaseName=Movie;encrypt=true;trustServerCertificate=true" \\
                         -e DB_CONNECTION_USERNAME=sa \\
                         -e DB_CONNECTION_PASSWORD=123456789 \\
                         -e UPLOAD_DIR=File \\
-                        ${IMAGE_NAME}
+                        ${BACKEND_IMAGE}
                     """
+
+                    sh "docker run -d --name ${FRONTEND_CONTAINER} -p ${FRONTEND_PORT}:${8080} ${FRONTEND_IMAGE}"
                 }
             }
         }
@@ -44,7 +51,7 @@ pipeline {
 
     post {
         success {
-            echo "App is deployed and running at http://<your-jenkins-ip>:${PORT}"
+            echo "App is deployed and running"
         }
         failure {
             echo 'Build or deployment failed'
