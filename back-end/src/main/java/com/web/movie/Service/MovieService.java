@@ -67,9 +67,12 @@ public class MovieService {
         // fileService.deletImage(videoPath);
         return movieMapper.toMovieDto(savedMovie);
     }
-    public MovieDto update(int id, MovieRequestDto movieDto, MultipartFile image){
+
+    @Transactional
+    public MovieDto update(int id, MovieRequestDto movieDto, MultipartFile image, MultipartFile video){
         Movie movie = movieRepository.findById(id).orElseThrow(()->new NotFoundException("Movie not found"));
         String preImageFilename = movie.getImageFileName();
+        String preVideoFileName = movie.getVideoFileName();
 
         if(image!=null&&!image.isEmpty()){
             try{
@@ -80,21 +83,43 @@ public class MovieService {
                 throw ex;
             }
         }
-        List<Genre> genres = genreRepository.findAllById(movieDto.getGenreIds());
-        Country country = countryRepository.findById(movieDto.getCountryId()).get();
-        movie.setGenres(genres);
+
+        if(video!=null&&!video.isEmpty()){
+            try{
+                String videoName = fileService.saveVideo(video);
+                movie.setVideoFileName(videoName);
+            }
+            catch(Exception ex){
+                fileService.deletImage(movie.getImageFileName());
+                throw ex;
+            }
+        }
+        if(movieDto.getGenreIds()!=null){
+            List<Genre> genres = genreRepository.findAllById(movieDto.getGenreIds());
+            movie.setGenres(genres);
+        }
+        if(movieDto.getCountryId()!=null){
+            Country country = countryRepository.findById(movieDto.getCountryId()).orElse(null);
+            movie.setCountry(country);
+        }
         movie.setDescription(movieDto.getDescription());
         movie.setName(movieDto.getName());
-        movie.setCountry(country);
+        
         try {
             movieRepository.save(movie);
         } catch (Exception ex) {
-            fileService.deletImage(movie.getImageFileName());
+            if(image!=null&&!image.isEmpty())
+                fileService.deletImage(movie.getImageFileName());
+            if(video!=null&&!video.isEmpty())
+                fileService.deleteVideo(movie.getVideoFileName());
             throw ex;
         }
 
         if(image!=null&&!image.isEmpty()){
             fileService.deletImage(preImageFilename);
+        }
+        if(video!=null&&!video.isEmpty()){
+            fileService.deleteVideo(preVideoFileName);
         }
         
 

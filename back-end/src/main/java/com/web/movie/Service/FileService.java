@@ -75,8 +75,25 @@ public class FileService {
             }
         }
         
-        return false;
-
+        return false; 
+    }
+    public Boolean deleteVideo(String name){
+   
+        Path path = null;
+        try {
+            path = Paths.get(uploadDir,name);
+        } catch (Exception e) {
+            return false;
+        }        
+        if(path!=null&&Files.exists(path)){
+            try {
+                Files.delete(path);
+                return true;
+            } catch (IOException e) {
+                return false;
+            }
+        }
         
+        return false; 
     }
 }

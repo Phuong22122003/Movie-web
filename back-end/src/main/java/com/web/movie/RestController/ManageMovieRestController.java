@@ -37,7 +37,8 @@ public class ManageMovieRestController {
     @PatchMapping("/{id}")
     public ResponseEntity<MovieDto> update(@PathVariable("id") int id,
                                             @RequestPart(name = "image",required = false) MultipartFile image,
+                                            @RequestPart(name = "video",required = false) MultipartFile video,
                                             @RequestPart("movie") MovieRequestDto movie){
-        return ResponseEntity.ok().body(movieService.update(id,movie,image));
+        return ResponseEntity.ok().body(movieService.update(id,movie,image,video));
     }
 }

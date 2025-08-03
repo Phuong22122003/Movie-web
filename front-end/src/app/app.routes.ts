@@ -36,6 +36,11 @@ export const routes: Routes = [
             {
                 path: "movie",
                 component: MovieAdminComponent
+            },
+            {
+                path:'',
+                redirectTo:'movie',
+                pathMatch:'full'
             }
         ],
     },
