@@ -22,7 +22,7 @@ pipeline {
             steps {
                 script {
                     sh "docker build --tag ${BACKEND_IMAGE} back-end"
-                    sh "docker build --tag ${FRONTEND_IMAGE} fron-end"
+                    sh "docker build --tag ${FRONTEND_IMAGE} front-end"
                 }
             }
         }
