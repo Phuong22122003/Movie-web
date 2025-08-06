@@ -1,22 +1,36 @@
-
-# Movie web
+# Movie Web
 
 ## Description
-- Main features: 
-    + User: users can choose the movie by genre or country and post comment if registered.
-    + Admin: admin can add movie, modify movie names, descriptions and thumbnail images, or delete movies.
-## Technologies:
-- Backend: Spring boot, Spring Security, Spring JPA
-- Database: MS SQL server 
-- Frontend: React.js, HTML, CSS
-## How to use 
-- Clone the project 
-- Run the data script to generate database.
-- Configure the direction in application.properties for saving video and image.
-- Set up key in JWT provider class as needed
+Movie Web is a full-stack web application that allows users to browse and watch movies. Users can filter movies by genre or country and post comments after registering. Administrators can manage the movie database, including adding, editing, or deleting movies and updating thumbnails and descriptions.
 
-## UI
-![Home page](https://i.imgur.com/caJiXeH.png)
-![Movie details](https://i.imgur.com/gHiT9xS.png)
-![Play video](https://i.imgur.com/BEdjOr8.png)
-![Play video](https://i.imgur.com/kgn7ySR.png)
+The project integrates Redis for caching movie data to enhance performance, is containerized using Docker, and includes a basic CI/CD pipeline with Jenkins for automated build and deployment.
+
+## Features
+
+### User
+- Browse movies by genre or country
+- View movie details and watch trailers
+- Post comments on movies (requires login)
+
+### Admin
+- Add new movies
+- Edit movie names, descriptions, and thumbnail images
+- Delete movies
+- Access secured admin panel with authentication
+
+## Technologies Used
+- Backend: Spring Boot, Spring Security, Spring Data JPA
+- Frontend: Angular, Typescript, Tailwind.
+- Database: MS SQL Server
+- Cache: Redis
+- Containerization: Docker
+- CI/CD: Jenkins
+
+## Screenshots
+
+### Home Page
+![Home page](https://res.cloudinary.com/dwhlihfnn/image/upload/v1754494878/524d30ffb84b3115685a_cok67f.jpg)
+
+### Movie Details
+![Movie details](https://res.cloudinary.com/dwhlihfnn/image/upload/v1754495708/5567b04201f688a8d1e7_e7xeps.jpg)
+
