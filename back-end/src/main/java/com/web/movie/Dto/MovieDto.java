@@ -19,7 +19,7 @@ public class MovieDto {
     private String image_url;
     private String name;
     private String description;
-    private String movie_url;
+    private String video_url;
     private List<GenreDto> genres;
     private UserDto user;
     private CountryDto country;

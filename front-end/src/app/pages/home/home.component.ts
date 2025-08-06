@@ -6,6 +6,7 @@ import { Movie } from '../../models/movie';
 import { CardComponent } from "../../components/card/card.component";
 import { MovieService } from '../../service/movie.service';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +16,7 @@ import { CommonModule } from '@angular/common';
 })
 export class HomeComponent {
   movies!: Movie[];
-  constructor(private movieService: MovieService){}
+  constructor(private movieService: MovieService, private router: Router){}
   loadMovies(){
     this.movieService.getAll(0,10).subscribe((movies)=>(this.movies=movies));
   }

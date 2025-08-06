@@ -13,7 +13,7 @@ import com.web.movie.Entity.Movie;
 @Mapper(componentModel = "spring")
 public interface MovieMapper {
     @Mapping(target = "image_url", expression = "java(buildImageUrl(movie.getImageFileName()))")
-    @Mapping(target = "movie_url", expression = "java(buildVideoUrl(movie.getVideoFileName()))")
+    @Mapping(target = "video_url", expression = "java(buildVideoUrl(movie.getVideoFileName()))")
     MovieDto toMovieDto(Movie movie);
 
     Movie toMovie(MovieRequestDto movie);

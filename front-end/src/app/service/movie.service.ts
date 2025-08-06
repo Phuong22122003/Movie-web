@@ -15,6 +15,9 @@ export class MovieService {
 
     return this.http.get<Movie[]>(this.url, { params: { 'offset': offset, 'limit': limit } })
   }
+  getById(id:string): Observable<Movie>{
+    return this.http.get<Movie>(this.url+`/${id}`);
+  }
   addMovie(movie:FormData){
     console.log('add movie');
     

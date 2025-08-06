@@ -1,4 +1,7 @@
-<div class="w-[256px] h-[392px] flex flex-col gap-2 cursor-pointer">
+<div 
+  class="w-[256px] h-[392px] flex flex-col gap-2 cursor-pointer" 
+  [routerLink]="['/movie', movie.id]"
+>
   <img
     src="{{ movie.image_url }}"
     alt=""

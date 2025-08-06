@@ -1,14 +1,10 @@
 <div class="flex gap-5">
-  <div class="w-100 h-100">
-    <img
-      class="h-full w-full rounded-md"
-      src="https://i.ytimg.com/vi/z_zOc6V4mcg/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLB6ue3JcJArW3HldszCqQZydGNybQ"
-      alt=""
-    />
+  <div class="w-100 h-100 min-w-100">
+    <img class="h-full w-full rounded-md" src="{{ movie.image_url }}" alt="" />
   </div>
   <div class="flex-grow flex flex-col justify-around">
     <div class="flex justify-between">
-      <h3 class="text-3xl font-bold">Silo</h3>
+      <h3 class="text-3xl font-bold">{{ movie.name }}</h3>
       <button class="bg-[#FF0000] px-2 py-2 flex rounded-[5px] cursor-pointer">
         <div>
           <i class="fa-solid fa-plus"></i>
@@ -17,22 +13,33 @@
       </button>
     </div>
     <div class="flex gap-4">
-      <button class="bg-white rounded-md px-2 py-2 text-black">Action</button>
+      <button class="bg-white rounded-md px-2 py-2 text-black">Drama</button>
       <button class="bg-white rounded-md px-2 py-2 text-black">
-        Advanture
+         Slice of Life
       </button>
       <button class="bg-white rounded-md px-2 py-2 text-black">
-        Science Fiction
+        Romance
       </button>
     </div>
     <div>
-      In a ruined and toxic future, a community exists in a giant underground
-      silo that plunges hundreds of stories deep. There, men and women live in a
-      society full of regulations they believe are meant to protect them.
+      {{ movie.description }}
     </div>
     <div class="flex flex-col justify-between gap-2">
-      <span>Country: Viet Nam</span>
-      <span>Genre: Action, Advanture</span>
+      <span>Country: {{ movie.country?.name || "Unknow" }}</span>
+      <div class="flex gap-2">
+        <span>Genre:</span>
+
+        <!-- Nếu có genres -->
+      <ng-container *ngIf="movie.genres?.length; else noGenres">
+          <span *ngFor="let genre of movie.genres">{{ genre }}</span>
+        </ng-container>
+
+        <!-- Nếu không có genres -->
+        <ng-template #noGenres>
+          <span>Unknown genre</span>
+        </ng-template>
+      </div>
+
       <span>Date Release: May 05 2023</span>
       <span>Actor: Phuong</span>
     </div>

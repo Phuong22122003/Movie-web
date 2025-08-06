@@ -1,3 +1,8 @@
-<video controls class="h-150 w-full">
-    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+
+<div *ngIf="!movieUrl" class="flex justify-center items-center h-150">
+  <div class="animate-spin rounded-full h-12 w-12 border-t-4 border-blue-500 border-solid"></div>
+</div>
+
+<video *ngIf="movieUrl" controls class="h-150 w-full">
+  <source [src]="movieUrl" type="video/mp4" />
 </video>

@@ -12,11 +12,13 @@
         <ul
           class="absolute top-full left-0 mt-0 hidden group-hover:flex flex-col bg-white text-black rounded shadow-lg z-50 min-w-[160px] max-h-[300px] overflow-y-auto py-2"
         >
-          <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Action</li>
-          <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Adventure</li>
+          <ng-container *ngFor="let genre of genres">
+            <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" >{{genre.name}}</li>
+          </ng-container>
+          <!-- <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Adventure</li>
           <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Drama</li>
           <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Horror</li>
-          <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Sci-Fi</li>
+          <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Sci-Fi</li> -->
           <!-- Add more items as needed -->
         </ul>
       </li>
@@ -27,11 +29,9 @@
         <ul
           class="absolute top-full left-0 mt-0 hidden group-hover:flex flex-col bg-white text-black rounded shadow-lg z-50 min-w-[160px] max-h-[300px] overflow-y-auto py-2"
         >
-          <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Action</li>
-          <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Adventure</li>
-          <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Drama</li>
-          <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Horror</li>
-          <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Sci-Fi</li>
+          <ng-container *ngFor="let country of countries">
+            <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" >{{country.name}}</li>
+          </ng-container>
           <!-- Add more items as needed -->
         </ul>
       </li>
