@@ -6,35 +6,52 @@ import { Movie } from '../../models/movie';
 import { CardComponent } from "../../components/card/card.component";
 import { MovieService } from '../../service/movie.service';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  imports: [MovieHeroComponent, SmallCardComponent, CardComponent,CommonModule],
+  imports: [MovieHeroComponent, SmallCardComponent, CardComponent, CommonModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
   movies!: Movie[];
-  constructor(private movieService: MovieService, private router: Router){}
-  loadMovies(){
-    this.movieService.getAll(0,10).subscribe((movies)=>(this.movies=movies));
+  constructor(private movieService: MovieService, private router: Router, private route: ActivatedRoute) { }
+  loadMovies() {
+    this.route.paramMap.subscribe(params => {
+      const value = params.get('value');
+
+      if (!value) {
+        this.movieService.getAll(0, 10).subscribe(movies => this.movies = movies);
+        return;
+      }
+
+      if (this.route.snapshot.routeConfig?.path?.startsWith('genre')) {
+        this.movieService.getMovieByGenre(value, 0, 10)
+          .subscribe(movies => this.movies = movies);
+      }
+      else if (this.route.snapshot.routeConfig?.path?.startsWith('country')) {
+        this.movieService.getMovieByCountry(value, 0, 10)
+          .subscribe(movies => this.movies = movies);
+      }
+    });
   }
-  ngOnInit(){
+  ngOnInit() {
+
     this.loadMovies();
   }
   movie = {
-    id:1,
-    name:"Avatar-the way of water",
+    id: 1,
+    name: "Avatar-the way of water",
     description: "Amazing",
-    country:{
-      id:"vietnam",
+    country: {
+      id: "vietnam",
       name: "Viet Nam"
     },
-    image_url:"https://i.pinimg.com/736x/24/83/62/248362b83090e77d104dc9d0b98a0e58.jpg",
-    genres:[{
-      id:1,
-      name:"action"
+    image_url: "https://i.pinimg.com/736x/24/83/62/248362b83090e77d104dc9d0b98a0e58.jpg",
+    genres: [{
+      id: 1,
+      name: "action"
     }]
   };
 }

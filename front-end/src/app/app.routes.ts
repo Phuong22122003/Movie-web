@@ -18,6 +18,14 @@ export const routes: Routes = [
                 component: HomeComponent
             },
             {
+                path: "country/:value",
+                component: HomeComponent
+            },
+            {
+                path: "genres/:value",
+                component: HomeComponent
+            },
+            {
                 path: "movie/:id",
                 component: MovieComponent,
                 canActivate: [authGuard]

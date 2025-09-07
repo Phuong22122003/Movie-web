@@ -3,6 +3,8 @@ package com.web.movie.Service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -38,6 +40,7 @@ public class MovieService {
     }
 
     @Transactional
+    @CachePut(value="movies",key = "#result.id")
     public MovieDto addMovie(MultipartFile image, MultipartFile video, MovieRequestDto movieDto){
         String imagePath = null;
         String videoPath = null;
@@ -129,13 +132,14 @@ public class MovieService {
         int rowAffected = movieRepository.deleteMovieById(id);
         if(rowAffected==0) throw new NotFoundException("Movie not found");
     }
-
+    @Cacheable(value = "movies",key = "#id")
     public MovieDto findMovieById(Integer id){
         Movie movie = movieRepository.findById(id).orElseThrow(()->new NotFoundException("Movie not found"));
         return movieMapper.toMovieDto(movie);
     }
-    public List<MovieDto> findMoviesByGenreID(int id, int offset, int limit){
-        List<Movie> movies = movieRepository.findMovieByGenreId(id,limit,offset);
+    public List<MovieDto> findMoviesByGenre(String name, int offset, int limit){
+        var genre = genreRepository.findByName(name).orElseThrow(()->new NotFoundException("Genre not found"));
+        List<Movie> movies = movieRepository.findMovieByGenreId(genre.getId(),offset, limit);
         return movieMapper.toMovieDtos(movies);
     }
 

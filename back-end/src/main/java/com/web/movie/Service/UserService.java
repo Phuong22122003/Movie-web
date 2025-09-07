@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -29,12 +31,14 @@ public class UserService {
     @Autowired private AuthenticationManager authenticationManager;
     @Autowired private JwtTokenProvider jwtTokenProvider;
 
+    @Cacheable(value = "users", key = "#username")
     public UserDto findUserByUsername(String username){
         User user =  userRepository.findByUsername(username).orElseThrow(()->new NotFoundException("Username not found"));
         user.setPassword(null);
         
         return userMapper.toUserDto(user);
     }
+    @CachePut(value = "users", key = "#sigupRequest.username")
     public UserDto addUser(SigupRequest sigupRequest){
         User user = userMapper.toUser(sigupRequest);
         user.setPassword(passwordEncoder.encode(sigupRequest.getPassword()));
@@ -47,6 +51,7 @@ public class UserService {
         }
         return userMapper.toUserDto(savedUser);
     }
+
     public Map<String,String> login(LoginRequest request){
         try{
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));

@@ -2,6 +2,7 @@ package com.web.movie.Service;
 
 import java.util.List;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.web.movie.Dto.CountryDto;
@@ -17,6 +18,8 @@ public class CountryService {
         this.countryRepository = countryRepository;
         this.countryMapper = countryMapper;
     }
+
+    @Cacheable(value = "countries")
     public List<CountryDto> getAllCountries(){
         List<Country> countries = countryRepository.findAll();
         return countryMapper.toCountryDtos(countries);

@@ -27,10 +27,17 @@ public class MovieRestController {
     }
 
     @GetMapping("/country/{name}")
-    public ResponseEntity<List<MovieDto>> findListMovieByCountry(@PathVariable("name") String country
-    ,@RequestParam(name = "offset",defaultValue = "0") int offset, 
+    public ResponseEntity<List<MovieDto>> findListMovieByCountry(@PathVariable("name") String country,
+    @RequestParam(name = "offset",defaultValue = "0") int offset, 
     @RequestParam(name = "limit", defaultValue = "10") int limit){
         return ResponseEntity.ok().body(movieService.findMoviesByCountry(country,offset,limit));
+    }
+    
+    @GetMapping("/genres/{name}")
+    public ResponseEntity<List<MovieDto>> findListMovieByGenre(@PathVariable("name") String genre,
+    @RequestParam(name = "offset",defaultValue = "0") int offset, 
+    @RequestParam(name = "limit", defaultValue = "10") int limit){
+        return ResponseEntity.ok().body(movieService.findMoviesByGenre(genre,offset,limit));
     }
     
     @GetMapping("/{id}")

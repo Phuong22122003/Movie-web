@@ -15,6 +15,13 @@ export class MovieService {
 
     return this.http.get<Movie[]>(this.url, { params: { 'offset': offset, 'limit': limit } })
   }
+
+  getMovieByGenre(genre: string, offset: number, limit: number){
+    return this.http.get<Movie[]>(`${this.url}/genres/${genre}`,{params:{'offset':offset, 'limit':limit}})
+  }
+  getMovieByCountry(country: string, offset: number, limit: number){
+    return this.http.get<Movie[]>(`${this.url}/country/${country}`,{params:{'offset':offset, 'limit':limit}})
+  }
   getById(id:string): Observable<Movie>{
     return this.http.get<Movie>(this.url+`/${id}`);
   }

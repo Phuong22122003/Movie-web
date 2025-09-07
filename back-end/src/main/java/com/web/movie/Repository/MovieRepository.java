@@ -22,7 +22,7 @@ public interface MovieRepository extends JpaRepository<Movie,Integer>{
                 SELECT MOVIE_ID
                 FROM Movie_Genre
                 WHERE GENRE_ID = :genreId
-            ) mg ON m.ID = mg.MOVIE_ID
+            ) mg ON m.ID = mg.MOVIE_ID ORDER BY m.ID
             OFFSET :offset ROWS FETCH NEXT :limit ROWS ONLY
             """,
             nativeQuery = true)
