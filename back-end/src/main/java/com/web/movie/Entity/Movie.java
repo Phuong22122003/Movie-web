@@ -1,5 +1,6 @@
 package com.web.movie.Entity;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -54,4 +55,6 @@ public class Movie {
     @JoinColumn(name = "COUNTRY_ID")
     private Country country;
 
+    @Column(name = "CREATED_DATE")
+    private LocalDateTime createdDate;
 }

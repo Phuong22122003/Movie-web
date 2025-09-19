@@ -1,7 +1,10 @@
 package com.web.movie.Dto;
 
+import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.web.movie.Dto.response.UserDto;
 
@@ -14,7 +17,7 @@ import lombok.AllArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class MovieDto {
+public class MovieDto implements Serializable {
     private int id;
     private String image_url;
     private String name;
@@ -23,4 +26,6 @@ public class MovieDto {
     private List<GenreDto> genres;
     private UserDto user;
     private CountryDto country;
+    // @JsonFormat(pattern = "dd/MM/yyyy")
+    private LocalDateTime createdDate;
 }

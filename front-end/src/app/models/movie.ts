@@ -9,4 +9,5 @@ export interface Movie {
     video_url?: string;
     genres?: Genre[];
     country?: Country;
+    createdDate?: string;
 }

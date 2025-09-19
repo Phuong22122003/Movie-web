@@ -1,11 +1,11 @@
-<div class="flex gap-5">
-  <div class="w-100 h-100 min-w-100">
+<div class="flex gap-5 flex-col sm:flex-row">
+  <div class="lg:min-w-100 lg:min-h-100">
     <img class="h-full w-full rounded-md" src="{{ movie.image_url }}" alt="" />
   </div>
   <div class="flex-grow flex flex-col justify-around">
     <div class="flex justify-between">
       <h3 class="text-3xl font-bold">{{ movie.name }}</h3>
-      <button class="bg-[#FF0000] px-2 py-2 flex rounded-[5px] cursor-pointer">
+      <button class="bg-[#FF0000] px-2 py-2 flex rounded-[5px] cursor-pointer h-fit">
         <div>
           <i class="fa-solid fa-plus"></i>
         </div>
@@ -13,13 +13,7 @@
       </button>
     </div>
     <div class="flex gap-4">
-      <button class="bg-white rounded-md px-2 py-2 text-black">Drama</button>
-      <button class="bg-white rounded-md px-2 py-2 text-black">
-         Slice of Life
-      </button>
-      <button class="bg-white rounded-md px-2 py-2 text-black">
-        Romance
-      </button>
+      <button class="bg-white rounded-md px-2 py-2 text-black" *ngFor="let genre of movie.genres">{{genre.name}}</button>
     </div>
     <div>
       {{ movie.description }}
@@ -31,7 +25,7 @@
 
         <!-- Nếu có genres -->
       <ng-container *ngIf="movie.genres?.length; else noGenres">
-          <span *ngFor="let genre of movie.genres">{{ genre }}</span>
+          <span *ngFor="let genre of movie.genres">{{ genre.name }}</span>
         </ng-container>
 
         <!-- Nếu không có genres -->
@@ -40,7 +34,7 @@
         </ng-template>
       </div>
 
-      <span>Date Release: May 05 2023</span>
+      <span>Release date: {{movie.createdDate}}</span>
       <span>Actor: Phuong</span>
     </div>
   </div>

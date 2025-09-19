@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.web.movie.CustomException.NotFoundException;
@@ -26,7 +27,8 @@ public class CommentService {
                             .commentAt(LocalDateTime.now())
                             .movieId(commentRequestDto.getMovieId())
                             .build();
-        User user = userRepository.findById(commentRequestDto.getUserId()).orElseThrow(()->new NotFoundException("User not found"));
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userRepository.findByUsername(username).orElseThrow(()->new NotFoundException("User not found"));
         comment.setUser(user);
         Comment savedComment = commentRepository.save(comment);
         return commentMapper.toCommentDto(savedComment);

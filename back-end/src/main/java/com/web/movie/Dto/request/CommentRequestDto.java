@@ -6,8 +6,6 @@ import lombok.Data;
 @Builder
 @Data
 public class CommentRequestDto {
-    private String userId;
     private String comment;
     private int movieId;
-
 }

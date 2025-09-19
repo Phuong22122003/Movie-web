@@ -1,10 +1,13 @@
 package com.web.movie.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,8 +18,10 @@ import com.web.movie.Dto.request.MovieRequestDto;
 import com.web.movie.Entity.Country;
 import com.web.movie.Entity.Genre;
 import com.web.movie.Entity.Movie;
+import com.web.movie.Entity.MovieHeroSlot;
 import com.web.movie.Repository.CountryRepository;
 import com.web.movie.Repository.GenreRepository;
+import com.web.movie.Repository.MovieHeroSlotRepository;
 import com.web.movie.Repository.MovieRepository;
 import com.web.movie.mapper.MovieMapper;
 
@@ -29,7 +34,7 @@ public class MovieService {
     @Autowired private GenreRepository genreRepository;
     @Autowired private MovieMapper movieMapper;
     @Autowired private CountryRepository countryRepository;
-
+    @Autowired private MovieHeroSlotRepository movieHeroSlotRepository;
     public List<Movie> findAllMovies(){
         return movieRepository.findAll();
     }
@@ -64,6 +69,7 @@ public class MovieService {
         movie.setLength((int) video.getSize());
         movie.setCountry(country);
         movie.setGenres(genres);
+        movie.setCreatedDate(LocalDateTime.now());
         var savedMovie = movieRepository.save(movie);
    
         // fileService.deletImage(imagePath);
@@ -149,8 +155,26 @@ public class MovieService {
         return movieMapper.toMovieDtos(movies);
 
     }
-    public List<MovieDto> searchMovies(String keyword){
-        List<Movie> movies = movieRepository.searchMovies(keyword);
+    public Page<MovieDto> searchMovies(String keyword, int pageNumber, int pageSize){
+        Page<Movie> page = movieRepository.searchMovies(keyword, PageRequest.of(pageNumber, pageSize));
+        List<Movie> movies = page.getContent();
+        Page<MovieDto> movieDtos = new PageImpl<>(movieMapper.toMovieDtos(movies), page.getPageable(), page.getTotalElements());
+        return movieDtos;
+    }
+
+    public List<MovieDto> getMovieSlot(){
+        List<MovieHeroSlot> movieHeroSlots = movieHeroSlotRepository.findCurrentSlot();
+        List<Movie> movies = movieHeroSlots.stream().map(s-> s.getMovie()).toList();
+        if(movies.isEmpty()){
+            int SLOT_NUMBER = 10;
+           movies = movieRepository.getCurrentMovie(SLOT_NUMBER);
+        }
         return movieMapper.toMovieDtos(movies);
     }
+    
+    public List<MovieDto> getRecentlyUpdated(int limit){
+        List<Movie> movies = movieRepository.getCurrentMovie(limit); 
+        return movieMapper.toMovieDtos(movies);
+    }
+    
 }

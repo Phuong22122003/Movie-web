@@ -22,21 +22,26 @@ export class HeaderComponent {
     private router: Router,
     private genreService: GenreService,
     private countryService: CountryService
-  ){}
-  
-  loadData(){
-    this.countryService.getAll().subscribe((countries)=>(this.countries = countries));
-    this.genreService.getAll().subscribe((genres)=>(this.genres = genres));
+  ) { }
+
+  loadData() {
+    this.countryService.getAll().subscribe((countries) => (this.countries = countries));
+    this.genreService.getAll().subscribe((genres) => (this.genres = genres));
   }
-  ngOnInit(){
+  ngOnInit() {
     let jwt = localStorage.getItem('jwt');
-    if(jwt != null) this.isLoggedIn = true;
-    
+    if (jwt != null) this.isLoggedIn = true;
+
     this.loadData();
-    this.crd.detectChanges(); 
+    this.crd.detectChanges();
   }
-  logout(){
+  logout() {
     this.authService.logout();
     this.isLoggedIn = false;
+  }
+  onSearch(query: string) {
+    if (query && query.trim().length > 0) {
+      this.router.navigate(['/search'], { queryParams: { q: query } });
+    }
   }
 }

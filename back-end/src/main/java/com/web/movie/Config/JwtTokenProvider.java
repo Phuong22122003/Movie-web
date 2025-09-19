@@ -24,7 +24,7 @@ public class JwtTokenProvider {
                 .signWith(SignatureAlgorithm.HS512,secret_key)
                 .compact();
         }
-    public String getUserIdFromJwt(String token){
+    public String getUsernameFromJwt(String token){
         Claims claims = Jwts.parser()
                             .setSigningKey(secret_key)
                             .parseClaimsJws(token)

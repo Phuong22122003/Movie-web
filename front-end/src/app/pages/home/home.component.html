@@ -5,12 +5,8 @@
     <h3 class="pt-10 text-2xl">Recently Updated</h3>
     <div class="flex items-center gap-4 pt-5">
         <div class="flex flex-row justify-between flex-grow gap-4">
-            <app-small-card [movie]="movie"></app-small-card>
-            <app-small-card [movie]="movie"></app-small-card>
-            <app-small-card [movie]="movie"></app-small-card>
-            <app-small-card [movie]="movie"></app-small-card>
-            <app-small-card [movie]="movie"></app-small-card>
-            <app-small-card [movie]="movie"></app-small-card>
+
+            <app-small-card *ngFor="let movie of recentlyUpdatedMovie" [movie]="movie"></app-small-card>
         </div>
         <i class="fa-solid fa-arrow-right"></i>
     </div>
@@ -21,7 +17,7 @@
             <i class="fa-solid fa-arrow-right"></i>
         </div>
     </div>
-    <div class="flex flex-row justify-between flex-grow gap-4 pt-5">
+    <div class="flex flex-row gap-4 pt-5 overflow-x-auto scrollbar-hide">
         <app-card *ngFor="let movie of movies" [movie]="movie"></app-card>
     </div>
     <div class="pt-10 flex items-center justify-between">
@@ -31,7 +27,7 @@
             <i class="fa-solid fa-arrow-right"></i>
         </div>
     </div>
-    <div class="flex flex-row justify-between flex-grow gap-4 pt-5">
+    <div class="flex flex-row gap-4 pt-5 overflow-x-auto scrollbar-hide">
         <app-card *ngFor="let movie of movies" [movie]="movie"></app-card>
     </div>
     <div class="pt-10 flex items-center justify-between">
@@ -41,7 +37,7 @@
             <i class="fa-solid fa-arrow-right"></i>
         </div>
     </div>
-    <div class="flex flex-row justify-between flex-grow gap-4 pt-5">
+    <div class="flex flex-row gap-4 pt-5 overflow-x-auto scrollbar-hide">
         <app-card *ngFor="let movie of movies" [movie]="movie" ></app-card>
     </div>
   </div>

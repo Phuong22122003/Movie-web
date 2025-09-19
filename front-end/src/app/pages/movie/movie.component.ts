@@ -26,6 +26,7 @@ export class MovieComponent {
   loadMovie() {
     this.movieService.getById(this.movieId).subscribe((movie) => { 
       this.movie = movie;
+      console.log(this.movie);
     });
   }
   ngOnInit() {

@@ -1,6 +1,8 @@
 package com.web.movie.Dto;
 
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.AllArgsConstructor;
@@ -13,7 +15,7 @@ import lombok.NoArgsConstructor;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @NoArgsConstructor
 @AllArgsConstructor
-public class CountryDto {
+public class CountryDto implements Serializable{
     private String id;
     private String name;
 }

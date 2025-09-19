@@ -1,6 +1,6 @@
 <div class="mx-30 flex flex-col gap-4">
     <app-film-card [movieUrl]="movie?.video_url"></app-film-card>
     <app-detail [movie]="movie"></app-detail>
+    <app-comment [movieId]="movie.id"></app-comment>
     <app-recommendation></app-recommendation>
-    <app-comment></app-comment>
 </div>

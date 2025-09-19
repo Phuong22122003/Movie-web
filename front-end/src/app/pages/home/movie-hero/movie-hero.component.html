@@ -1,10 +1,11 @@
 <div
     class="relative lg:h-[600px] text-white"
-    [ngStyle]="{ 'background-image': 'url(' + slides[currentIndex].image + ')' }"
+    [ngStyle]="{ 'background-image': 'url(' + movies[currentIndex].image_url + ')' }"
 >
     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex gap-10 ">
         <button 
             class="bg-[#FF0000] px-3 py-2 flex text-2xl rounded-[5px]"
+            routerLink="/movie/{{movies[currentIndex].id}}"
             >
             <span>Watch Now</span>
             <div>
@@ -21,12 +22,12 @@
         </button>
     </div>
     <div class="absolute bottom-20 left-10 flex flex-col lg:gap-5">
-        <h3 class="text-white text-3xl">Avartar: The way of watter</h3>
+        <h3 class="text-white text-3xl">{{movies[currentIndex].name}}</h3>
         <div class="flex items-center gap-2">
             <div class="flex gap-2 text-black">
-                <button class="bg-white rounded-full px-2 py-1">Action</button>
-                <button class="bg-white rounded-full px-2 py-1">Advanture</button>
-                <button class="bg-white rounded-full px-2 py-1">Science Fiction</button>
+                <button class="bg-white rounded-full px-2 py-1" *ngFor="let genre of movies[currentIndex].genres" routerLink="/genres/{{genre.name}}">
+                    {{genre.name}}
+                </button>
             </div>
             <div>
                 <span>3:12:00</span>
@@ -35,12 +36,12 @@
         <p
             class="w-[50%]"
         >
-            Set more than a decade after the events of the first film, learn the story of the Sully family (Jake, Neytiri, and their kids), the trouble that follows them, the lengths they go to keep each other safe, the battles they fight to stay alive, and the tragedies they endure.
+           {{movies[currentIndex].description}}
         </p>
     </div>
     <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
         <div
-            *ngFor="let slide of slides; index as i"
+            *ngFor="let slide of movies; index as i"
             (click)="setSlide(i)"
             class="w-3 h-3 rounded-full cursor-pointer"
             [ngClass]="{

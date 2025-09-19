@@ -1,5 +1,5 @@
 <div 
-  class="w-[256px] h-[392px] flex flex-col gap-2 cursor-pointer" 
+  class="w-[200px] h-[270px] flex flex-col gap-2 cursor-pointer" 
   [routerLink]="['/movie', movie.id]"
 >
   <img
@@ -10,9 +10,9 @@
   <div class="flex justify-between">
     <span class="truncate">{{ movie.name }}</span>
     <div class="flex gap-1">
-        <ng-container *ngIf="movie.genres">
+        <!-- <ng-container *ngIf="movie.genres">
           <span class="bg-[#FF0000] text-white rounded-[5px] px-1"  *ngFor="let genre of movie.genres">{{ genre.name }}</span>
-        </ng-container>
+        </ng-container> -->
         <span class="bg-red-500 rounded-[5px] px-1">HD</span>
     </div>
   </div>

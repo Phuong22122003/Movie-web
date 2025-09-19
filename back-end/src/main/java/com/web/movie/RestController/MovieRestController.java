@@ -3,6 +3,7 @@ package com.web.movie.RestController;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,7 +46,16 @@ public class MovieRestController {
         return ResponseEntity.ok().body(movieService.findMovieById(id));
     }
     @GetMapping("/search")
-    public ResponseEntity<List<MovieDto>> searchMovie(@RequestParam("keyword") String keyword){
-        return ResponseEntity.ok().body(movieService.searchMovies(keyword));
+    public ResponseEntity<Page<MovieDto>> searchMovie(@RequestParam("q") String q,@RequestParam("page_number") int pageNumber, @RequestParam("page_size") int pageSize){
+        return ResponseEntity.ok().body(movieService.searchMovies(q, pageNumber, pageSize));
+    }
+
+    @GetMapping("/slots")
+    public ResponseEntity<List<MovieDto>> getMovieHeroSlot(){
+        return ResponseEntity.ok().body(movieService.getMovieSlot());
+    }
+    @GetMapping("/recently-update")
+    public ResponseEntity<List<MovieDto>> getRecentlyUpdate(@RequestParam int limit){
+        return ResponseEntity.ok().body(movieService.getRecentlyUpdated(limit));
     }
 }

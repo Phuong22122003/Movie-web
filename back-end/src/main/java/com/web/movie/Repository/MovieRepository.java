@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.web.movie.Entity.Movie;
 
+import io.lettuce.core.dynamic.annotation.Param;
 import jakarta.transaction.Transactional;
 
 public interface MovieRepository extends JpaRepository<Movie,Integer>{
@@ -34,8 +35,11 @@ public interface MovieRepository extends JpaRepository<Movie,Integer>{
     int deleteMovieById(int id);
 
 
-    @Query(value = "SELECT * FROM MOVIE WHERE NAME LIKE %:keyword% OR DESCRIPTION LIKE %:keyword%",nativeQuery = true)
-    List<Movie> searchMovies(String keyword);
+    @Query("SELECT m FROM Movie m WHERE m.name LIKE CONCAT('%', :keyword, '%') OR m.description LIKE CONCAT('%', :keyword, '%')")
+    Page<Movie> searchMovies(@Param("keyword") String keyword, Pageable pageable);
+
+    @Query(value = "SELECT TOP(:limit) * FROM Movie order by CREATED_DATE", nativeQuery = true)
+    List<Movie> getCurrentMovie(int limit);
 }
 
 

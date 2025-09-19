@@ -7,6 +7,7 @@ import { SigupComponent } from './pages/sigup/sigup.component';
 import { authGuard } from './service/auth.guard';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { MovieAdminComponent } from './pages/movie-admin/movie-admin.component';
+import { SearchComponent } from './pages/search/search.component';
 
 export const routes: Routes = [
     {
@@ -29,6 +30,10 @@ export const routes: Routes = [
                 path: "movie/:id",
                 component: MovieComponent,
                 canActivate: [authGuard]
+            },
+            {
+                path: "search",
+                component: SearchComponent,
             },
             {
                 path: "",

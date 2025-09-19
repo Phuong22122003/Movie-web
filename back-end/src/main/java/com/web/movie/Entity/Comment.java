@@ -11,8 +11,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(
@@ -20,6 +22,8 @@ import lombok.Data;
     uniqueConstraints = @UniqueConstraint(columnNames = {"USER_ID","MOVIE_ID","COMMENTED_AT"}))
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Comment {
 
     @Id

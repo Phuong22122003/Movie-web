@@ -12,7 +12,7 @@
   </div>
 
   <!-- Grid of Cards -->
-  <div class="flex gap-5">
+  <div class="flex gap-5 flex-wrap">
     <div *ngFor="let movie of movies" class="relative group w-fit">
       <app-card [movie]="movie"></app-card>
 

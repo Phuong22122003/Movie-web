@@ -16,7 +16,7 @@ export class RecommendationComponent {
 
   }
   ngOnInit(){
-    this.movieService.getAll(0,10).subscribe((movies)=>{
+    this.movieService.getAll(0,20).subscribe((movies)=>{
       this.movies = movies;
     })
   }

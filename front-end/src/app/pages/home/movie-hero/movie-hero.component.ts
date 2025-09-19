@@ -1,40 +1,31 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-
+import { MovieService } from '../../../service/movie.service';
+import { Movie } from '../../../models/movie';
+import { Router, RouterLink } from '@angular/router';
 @Component({
   selector: 'app-movie-hero',
-  imports: [CommonModule],
+  imports: [CommonModule,RouterLink],
   templateUrl: './movie-hero.component.html',
   styleUrl: './movie-hero.component.scss'
 })
 export class MovieHeroComponent {
+  constructor(private movieService: MovieService){}
   currentIndex = 0;
-
-  slides = [
-    {
-      title: 'Movie One',
-      description: 'Description of movie one.',
-      image: 'https://lumiere-a.akamaihd.net/v1/images/avatar-twow-videobg01_cdd3dcb8.jpeg'
-    },
-    {
-      title: 'Movie Two',
-      description: 'Description of movie two.',
-      image: 'https://wallpapers.com/images/featured/avatar-2-the-way-of-water-vyj6bizvovhbk144.jpg'
-    },
-    {
-      title: 'Movie Three',
-      description: 'Description of movie three.',
-      image: 'https://lumiere-a.akamaihd.net/v1/images/avatar-twow-videobg01_cdd3dcb8.jpeg'
-    }
-  ];
+  movies!:Movie[];
 
   setSlide(index: number) {
     this.currentIndex = index;
   }
+
   ngOnInit() {
-    setInterval(() => {
-      this.currentIndex = (this.currentIndex + 1) % this.slides.length;
-    }, 5000);
+    this.movieService.getMovieSlot().subscribe((movies)=>{
+      this.movies = movies;
+      setInterval(() => {
+        this.currentIndex = (this.currentIndex + 1) % this.movies.length;
+      }, 5000);
+    });
+
   }
 
 }
